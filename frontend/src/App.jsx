@@ -7,19 +7,27 @@ import Dashboard from './pages/Dashboard'
 import JournalForm from './pages/JournalForm'
 import EditForm from './pages/EditForm'
 import Footer from './components/Footer'
+import { ToastContainer, toast } from 'react-toastify';
+import Register from './pages/Register'
 
 export default function App() {
   return (
+    <div className='flex flex-col min-h-screen'>
    <BrowserRouter>
    <Navbar/>
+   <main className='flex-grow'>
    <Routes>
     <Route path='/' element={<Home/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/dashboard' element={<Dashboard/>}/>
     <Route path='/new-entry' element={<JournalForm/>}/>
     <Route path='/dashboard/editform/:id' element={<EditForm/>}/>
+    <Route path='/register' element={<Register/>}/>
    </Routes>
+   </main>
    <Footer/>
    </BrowserRouter>
+   <ToastContainer/>
+   </div>
   )
 }

@@ -1,20 +1,22 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 export default function Login() {
  
 const [email,setEmail]=useState('')
 const [password,setPassword]=useState('')
 const navigate=useNavigate();
- const handleLogin=async()=>{
+ const handleLogin=async(e)=>{
+  e.preventDefault();
+  console.log("bhej raha hoon",email,password)
   try{
     const res=await axios.post('http://localhost:3000/api/auth/login',{email,password})
     localStorage.setItem('token',res.data.token);
-    alert('login successfull')
+    toast.success("Login succesful")
     navigate('/dashboard')
   }catch(err){
-    alert("wrong Email aur Password")
+    toast.error("wrong Email aur Password")
     console.log(err)
   }
 }

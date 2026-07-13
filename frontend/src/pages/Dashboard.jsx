@@ -5,8 +5,13 @@ import axios from 'axios'
 export default function Dashboard() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem("token");
+  
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(!token){
+      window.location.href="/login"
+      return;
+    }
     const fetchEntries = async () => {
       try {
         const res = await axios.get(
