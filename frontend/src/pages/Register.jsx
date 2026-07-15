@@ -1,8 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { setToken } from '../redux/authSlice'
 
 export default function Register() {
+    const dispatch=useDispatch();
     let [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -13,12 +16,13 @@ export default function Register() {
             return { ...currData, [e.target.name]: e.target.value }
         })
     }
-    let handleSubmit =async (e) => {
+    let handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let res =await axios.post("http://localhost:3000/api/auth/register", formData)
-            console.log("backend response ", res.data)
-            localStorage.setItem("token",res.data.token)
+            let res = await axios.post("http://localhost:3000/api/auth/register", formData)
+            dispatch(setToken(res.data.token))
+            //localStorage.setItem("token", res.data.token)
+            localStorage.setItem("user", JSON.stringify(res.data))
             toast.success("Register Successful")
             setFormData({
                 name: "",
