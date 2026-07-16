@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function Navbar() {
@@ -12,19 +12,23 @@ export default function Navbar() {
     navigate('/login')
   }
 
+const activeStyle = "bg-blue-700 px-3 py-2 rounded-lg font-semibold"
+  const normalStyle = "hover:bg-blue-800 px-3 py-2 rounded-lg transition"
+
+
   return (
     <div className="flex text-white bg-[#1e3a8a] h-[10] gap-10 px-8 py-4 list-none text-[20px] justify-between items-center">
       
         <div className="flex items-center gap-6">
-          <Link to='/'><li className="ms-3">Home</li></Link>
-          <Link to="/dashboard"><li>Dashboard</li></Link>
+          <NavLink to='/' className={({isActive})=>isActive?activeStyle:normalStyle}>Home</NavLink>
+          <NavLink to="/dashboard" className={({isActive})=>isActive?activeStyle:normalStyle}>Dashboard</NavLink>
         </div>
         <div className="flex items-center gap-4">
-          {token ? (<button onClick={handleLogout}>Logout</button>) : (
-            <Link to="/login"><li>Login</li></Link>
+          {token ? (<button onClick={handleLogout} className={normalStyle}>Logout</button>) : (
+            <NavLink to="/login" className={({isActive})=>isActive?activeStyle:normalStyle}>Login</NavLink>
           )}
 
-          <Link to="/register"><li>Register</li></Link>
+          <NavLink to="/register" className={({isActive})=>isActive?activeStyle:normalStyle}>Register</NavLink>
         </div>
       
     </div>

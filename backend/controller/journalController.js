@@ -6,13 +6,14 @@ const getJournals = async (req, res) => {
 };
 
 const createJournal = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content ,mood} = req.body;
   if (!title || !content) {
     return res.status(400).json({ message: "Please add a title and content" });
   }
   const journal = await Journal.create({
     title,
     content,
+    mood,
     user: req.user._id,
   });
   res.status(201).json(journal);

@@ -9,6 +9,7 @@ import EditForm from './pages/EditForm'
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
 import Register from './pages/Register'
+import AddTask from './pages/AddTask'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
     <Route path='/' element={<Home/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/dashboard' element={<Dashboard/>}/>
+    <Route path='/add' element={<AddTask/>}/>
     <Route path='/new-entry' element={<JournalForm/>}/>
     <Route path='/dashboard/editform/:id' element={<EditForm/>}/>
     <Route path='/register' element={<Register/>}/>
