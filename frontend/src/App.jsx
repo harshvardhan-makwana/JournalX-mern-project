@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
-import JournalForm from './pages/JournalForm'
 import EditForm from './pages/EditForm'
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
@@ -22,7 +21,6 @@ export default function App() {
     <Route path='/login' element={<Login/>}/>
     <Route path='/dashboard' element={<Dashboard/>}/>
     <Route path='/add' element={<AddTask/>}/>
-    <Route path='/new-entry' element={<JournalForm/>}/>
     <Route path='/dashboard/editform/:id' element={<EditForm/>}/>
     <Route path='/register' element={<Register/>}/>
    </Routes>
