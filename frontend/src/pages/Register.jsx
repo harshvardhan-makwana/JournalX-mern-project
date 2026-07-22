@@ -30,7 +30,6 @@ export default function Register() {
                 password: ""
             })
         } catch (err) {
-            console.log(err)
             toast.error("Registration Failed")
         }
     }

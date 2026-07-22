@@ -23,7 +23,6 @@ const dispatch=useDispatch();
     navigate('/dashboard')
   }catch(err){
     toast.error("wrong Email aur Password")
-    console.log(err)
   }
 }
   return (

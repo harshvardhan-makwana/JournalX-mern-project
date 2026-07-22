@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import { toast } from 'react-toastify'
+import { useSelector } from "react-redux";
+
 
 export default function Dashboard() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const token = useSelector((state) => state.auth.token)
   useEffect(() => {
-    const token = localStorage.getItem("token");
+
     if (!token) {
       window.location.href = "/login"
       return;
@@ -21,7 +24,7 @@ export default function Dashboard() {
         setEntries(res.data);
         setLoading(false);
       } catch (err) {
-        console.log("err : ", err);
+        toast.error(err.response?.data?.message || "Something Went Wrong. Please Try Again.");
       }
     };
     fetchEntries();
@@ -32,15 +35,17 @@ export default function Dashboard() {
     try {
       await axios.delete(`http://localhost:3000/api/journal/${id}`, { headers: { Authorization: `Bearer ${token}` } })
       setEntries(entries.filter((entry) => entry._id !== id));
+      toast.success("Journal Deleted")
     } catch (err) {
-      console.log("DElete Error : ", err)
+      const errMsg = err.response?.data?.message || "Something Went Wrong. Please Try Again.";
+      toast.error(errMsg)
     }
   }
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 ">
       <div className="flex flex-col items-center  mb-6">
-      <h1 className="text-2xl text-center font-bold mb-6 ">My Journals</h1>
-      <Link to="/add" className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium shadow-md">+ Add New Task</Link>
+        <h1 className="text-2xl text-center font-bold mb-6 ">My Journals</h1>
+        <Link to="/add" className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium shadow-md">+ Add New Task</Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
         {entries.map((entry) => (

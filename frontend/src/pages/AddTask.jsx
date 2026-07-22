@@ -2,9 +2,11 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function AddTask() {
     const navigate = useNavigate();
+    const token=useSelector((state)=>state.auth.token)
     const [formData, setFormData] = useState({
         title: "",
         content: "",
@@ -17,18 +19,18 @@ export default function AddTask() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let token = localStorage.getItem("token")
-        if(!token)
-            window.location.href='/login'
+        //let token = localStorage.getItem("token")
+        
+        if (!token)
+            window.location.href = '/login'
         try {
-            await axios.post("http://localhost:3000/api/journal", formData , {
+            await axios.post("http://localhost:3000/api/journal", formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             toast.success("New Journal Created")
             navigate('/dashboard')
         } catch (err) {
-            console.log(err)
-            toast.error("Error : ", err)
+           toast.error(err.response?.data?.message || "Something Went Wrong. Please Try Again.");
         }
     }
     return (

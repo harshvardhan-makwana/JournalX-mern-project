@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState,useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function EditForm() {
   const { id } = useParams();
@@ -11,14 +13,14 @@ export default function EditForm() {
   useEffect(() => {
     const fetchJournal = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = useSelector((state)=>state.auth.token)
         const res = await axios.get(`http://localhost:3000/api/journal/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTitle(res.data.title);
         setContent(res.data.content);
       } catch (err) {
-        console.log(err);
+        toast.error(err.response?.data?.message);
       }
     };
     fetchJournal();
@@ -30,7 +32,7 @@ export default function EditForm() {
     await axios.put(`http://localhost:3000/api/journal/${id}`,{title,content}, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        alert("Journal Updated")
+        toast.success("Journal Updated")
         navigate('/dashboard')
   }
   return (

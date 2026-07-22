@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
-      
-      
       <section className="text-center py-20 px-6">
         <h1 className="text-5xl md:text-6xl font-bold text-purple-700 mb-4">
           JournalX 📝
@@ -21,8 +19,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
-
-      {/* Features */}
       <section className="py-16 px-6 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div className="text-center p-6 bg-white shadow-md rounded-xl hover:shadow-xl transition">
           <div className="text-5xl mb-3">🔒</div>
@@ -40,16 +36,12 @@ export default function Home() {
           <p className="text-gray-600">Even if the phone breaks down, the entries will remain safe</p>
         </div>
       </section>
-
-      {/* Quote Section */}
       <section className="bg-purple-100 py-12 px-6 text-center">
         <p className="text-2xl italic text-purple-800 max-w-3xl mx-auto">
-          "Writing is the painting of the voice" 
+          "Writing is the painting of the voice"
         </p>
         <p className="mt-4 text-purple-600">- Voltaire</p>
       </section>
-
-      {/* CTA */}
       <section className="py-16 text-center">
         <h2 className="text-3xl font-bold mb-4 text-gray-800">Ready to journal?</h2>
         <p className="text-gray-600 mb-6">Start writing today itself.</p>
